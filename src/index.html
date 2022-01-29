@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="thump.png" type="image/png">
+    <title>Tuvia</title>
+    <script src="require.js"></script>
+    <script src="build.js"></script>
+    <script type="text/javascript">
+      var screenWidth = 800;
+      var screenHeight = 480;
+      var imageDirectory = "images/";
+      var fps = 60;
+      var ctx;
+
+      function initgame() {
+        ctx = document.getElementById("canvas").getContext("2d");
+        ctx.imageSmoothingEnabled = false;
+        resizeCanvas();
+        var gameOptions = {
+          screenWidth: screenWidth,
+          screenHeight: screenHeight,
+          imageDirectory: imageDirectory,
+          canvasContext: ctx,
+          fps: 60,
+        };
+        require(['game'], (mod) => {
+          var Game = mod.default;
+          var g = new Game(gameOptions);
+          g.initialize();
+        });
+      }
+
+      window.onresize = function() {
+        resizeCanvas();
+      }
+
+      function resizeCanvas() {
+        var ratio = 80/48.0;
+        if (window.innerWidth / (window.innerHeight * 1.0) > ratio) {
+          ctx.canvas.style.height = "100%";
+          ctx.canvas.style.width = "auto";
+        } else {
+          ctx.canvas.style.width = "100%";
+          ctx.canvas.style.height = "auto";
+        }
+      }
+    </script>
+  </head>
+  <body style="background-color: #000A15; display: flex; align-items: center; justify-content: center; margin: 0; height: 100%" onload="initgame()">
+    <canvas id="canvas" width="800" height="480"></canvas>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "tuvia",
+  "version": "1.0.0",
+  "description": "Tuvia Game",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "clean": "rm -rf ./build",
+    "copyImages": "mkdir build -p && cp ./node_modules/requirejs/require.js ./src/index.html ./src/thump.png ./build && cp -r ./images ./build/images",
+    "publish": "npm run clean && npm run build && npm run copyImages",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcomaffo/tuvia.git"
+  },
+  "author": "Marco Boldt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcomaffo/tuvia/issues"
+  },
+  "homepage": "https://github.com/marcomaffo/tuvia#readme",
+  "dependencies": {
+    "requirejs": "^2.3.6",
+    "typescript": "^4.5.4"
+  }
+}
