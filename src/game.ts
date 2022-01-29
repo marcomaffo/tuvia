@@ -98,7 +98,7 @@ export default class Game {
   tileRectangles: Rectangle[];
 
   currentLevel: AllLevelSuperClass;
-  currentLevelNumber = 14;
+  currentLevelNumber = 0;
 
   imgsLoadedObj: { loaded: number, ready: boolean, max: number } = { loaded: 0, ready: false, max: 0 };
   playType: PlayType;
