@@ -6,9 +6,9 @@ import Enemy from "./enemy";
 export default class Boss2 extends Enemy {
   level: BossLevel2;
   bossBody: HTMLImageElement;
-  bossLegs: HTMLImageElement;
+  bossWheel: HTMLImageElement;
   coloredBody: HTMLCanvasElement;
-  coloredLegs: HTMLCanvasElement;
+  coloredWheel: HTMLCanvasElement;
 
   rotation = 0;
   timeToStart = 2000;
@@ -36,11 +36,11 @@ export default class Boss2 extends Enemy {
     this.circumference = 2 * Math.PI * (this.position.width / 2);
   }
 
-  loadBossContent(bossBody, bossLegs) {
+  loadBossContent(bossBody: HTMLImageElement, bossWheel: HTMLImageElement) {
     this.bossBody = bossBody;
-    this.bossLegs = bossLegs;
+    this.bossWheel = bossWheel;
     this.coloredBody = ImageHelper.tintImage(bossBody, "#FF0000");
-    this.coloredLegs = ImageHelper.tintImage(bossLegs, "#FF0000");
+    this.coloredWheel = ImageHelper.tintImage(bossWheel, "#FF0000");
   }
 
   update(elapsedMillis: number) {
@@ -54,62 +54,65 @@ export default class Boss2 extends Enemy {
     }
     switch (this.positionOnWalls) {
       case 0:
-          if (this.timeToStart < 0) {
-            if (this.speed < 2.0 && this.speed > -2.0) {
-              this.speed += 0.05 * this.direction;
-            }
-            this.posX += this.speed;
-            if (this.speed > 0) {
-              if (this.posX + this.position.width > 720) {
-                this.posX = 720 - this.position.width;
-                this.positionOnWalls = 1;
-              }
-            } else {
-              if (this.posX < 80) {
-                this.posX = 80;
-                this.positionOnWalls = 2;
-              }
+        if (this.timeToStart < 0) {
+          if (this.speed < 2.0 && this.speed > -2.0) {
+            this.speed += 0.05 * this.direction;
+          }
+          this.posX += this.speed;
+          if (this.speed > 0) {
+            if (this.posX + this.position.width > 720) {
+              this.posX = 720 - this.position.width;
+              this.positionOnWalls = 1;
             }
           } else {
-            this.timeToStart -= elapsedMillis;
+            if (this.posX < 80) {
+              this.posX = 80;
+              this.positionOnWalls = 2;
+            }
           }
-          break;
-        case 1:
-        case 2: this.posY -= Math.abs(this.speed);
-            if (this.posY < 80) {
-              this.posY = 80;
-              this.positionOnWalls = 3;
-            }
-          break;
-        case 3: this.posX -= this.speed;
-            if (this.speed > 0) {
-              if (this.level.getPlayerPositionX() >= this.posX) {
-                this.positionOnWalls = 4;
-              }
-            } else {
-              if (this.level.getPlayerPositionX() <= this.posX + 50) {
-                this.positionOnWalls = 4;
-              }
-            }
-            break;
-        case 4:
-            this.fallingSpeed += 0.3;
-            this.posY += this.fallingSpeed;
-            if (this.posY > 320) {
-              this.speed = 0.0;
-              this.fallingSpeed = 0.0;
-              this.posY = 320;
-              this.positionOnWalls = 0;
-              this.direction = (this.level.getPlayerPositionX() <this.posX) ? -1 : 1;
-              this.timeToStart = 1000;
-            }
-          break;
-        case 5: this.timeToStart -= elapsedMillis;
-            if (this.timeToStart < 0) {
-              this.level.playerCanMove = true;
-              this.positionOnWalls = 0;
-            }
-          break;
+        } else {
+          this.timeToStart -= elapsedMillis;
+        }
+        break;
+      case 1:
+      case 2:
+        this.posY -= Math.abs(this.speed);
+        if (this.posY < 80) {
+          this.posY = 80;
+          this.positionOnWalls = 3;
+        }
+        break;
+      case 3:
+        this.posX -= this.speed;
+        if (this.speed > 0) {
+          if (this.level.getPlayerPositionX() >= this.posX) {
+            this.positionOnWalls = 4;
+          }
+        } else {
+          if (this.level.getPlayerPositionX() <= this.posX + 50) {
+            this.positionOnWalls = 4;
+          }
+        }
+        break;
+      case 4:
+        this.fallingSpeed += 0.3;
+        this.posY += this.fallingSpeed;
+        if (this.posY > 320) {
+          this.speed = 0.0;
+          this.fallingSpeed = 0.0;
+          this.posY = 320;
+          this.positionOnWalls = 0;
+          this.direction = (this.level.getPlayerPositionX() <this.posX) ? -1 : 1;
+          this.timeToStart = 1000;
+        }
+        break;
+      case 5:
+        this.timeToStart -= elapsedMillis;
+        if (this.timeToStart < 0) {
+          this.level.playerCanMove = true;
+          this.positionOnWalls = 0;
+        }
+        break;
     }
 
 
@@ -133,10 +136,10 @@ export default class Boss2 extends Enemy {
 
   draw() {
     let toDrawImageBody: HTMLImageElement | HTMLCanvasElement = this.bossBody;
-    let toDrawImageLegs: HTMLImageElement | HTMLCanvasElement = this.bossLegs;
+    let toDrawImageWheel: HTMLImageElement | HTMLCanvasElement = this.bossWheel;
     if (this.lastShot > 0) {
         toDrawImageBody = this.coloredBody;
-        toDrawImageLegs = this.coloredLegs;
+        toDrawImageWheel = this.coloredWheel;
         this.lastShot--;
     }
 
@@ -145,7 +148,7 @@ export default class Boss2 extends Enemy {
     this.options.canvasContext.rotate(this.rotation);
     this.options.canvasContext.translate(-(this.position.width / 2 + this.position.x), -(this.position.height / 2 + this.position.y));
 
-    this.options.canvasContext.drawImage(toDrawImageLegs, this.positionOnScreen.x, this.positionOnScreen.y, this.positionOnScreen.width, this.positionOnScreen.height);
+    this.options.canvasContext.drawImage(toDrawImageWheel, this.positionOnScreen.x, this.positionOnScreen.y, this.positionOnScreen.width, this.positionOnScreen.height);
     this.options.canvasContext.restore();
 
     this.options.canvasContext.drawImage(toDrawImageBody, this.positionOnScreen.x, this.positionOnScreen.y, this.positionOnScreen.width, this.positionOnScreen.height);
