@@ -184,7 +184,6 @@ export default class Game {
       this.options.imageDirectory + setting + "/enemies/enemyFlying.png",
       this.options.imageDirectory + setting + "/comic.jpg",
       this.options.imageDirectory + setting + "/enemyCard.jpg",
-      this.options.imageDirectory + setting + "/bosses/boss1Rotation.png",
       this.options.imageDirectory + setting + "/bosses/boss1Animated.png",
       this.options.imageDirectory + setting + "/bosses/boss1Stone.png",
       this.options.imageDirectory + "stars.png",
@@ -215,19 +214,18 @@ export default class Game {
     this.enemyFlying = imgs[11];
     this.comicImage = imgs[12];
     this.movingCardImage = imgs[13];
-    this.boss1Rotation = imgs[14];
-    this.boss1Body = imgs[15];
-    this.boss1Stone = imgs[16];
-    this.boss1Stars = imgs[17];
-    this.surfRaft = imgs[18];
-    this.surfStone = imgs[19];
-    this.surfRiver = imgs[20];
-    this.surfTrunk = imgs[21];
-    this.surfEnemy = imgs[22];
-    this.boss2Body = imgs[23];
-    this.boss2Wheel = imgs[24];
-    this.boss3Body = imgs[25];
-    this.boss3Fire = imgs[26];
+    this.boss1Body = imgs[14];
+    this.boss1Stone = imgs[15];
+    this.boss1Stars = imgs[16];
+    this.surfRaft = imgs[17];
+    this.surfStone = imgs[18];
+    this.surfRiver = imgs[19];
+    this.surfTrunk = imgs[20];
+    this.surfEnemy = imgs[21];
+    this.boss2Body = imgs[22];
+    this.boss2Wheel = imgs[23];
+    this.boss3Body = imgs[24];
+    this.boss3Fire = imgs[25];
     this.helperImageRect = new Rectangle(20, 20, this.helperImage.width, this.helperImage.height);
     this.spaceRect = new Rectangle((20 + this.helperImage.width - this.spaceImage.width) / 2, 20 + this.helperImage.height, this.spaceImage.width, this.spaceImage.height);
 
@@ -265,7 +263,7 @@ export default class Game {
       case 5: 
           const bosslevel1 = new BossLevel1(this.playerStats, this);
           bosslevel1.loadContent(this.levelTileset1, this.charset, this.bulletIcon, this.powerUp1, this.powerUp2, this.powerUp3, this.tileRectangles, this.enemyWalking, this.enemyFloor, this.enemyThrowing, this.stone, this.enemyFlying);
-          bosslevel1.loadAditionalContent(this.boss1Rotation, this.boss1Body, this.boss1Stone, this.powerUp1, this.boss1Stars);
+          bosslevel1.loadAditionalContent(this.boss1Body, this.boss1Stone, this.powerUp1, this.boss1Stars);
           this.currentLevel = bosslevel1;
         break;
       case 6: 

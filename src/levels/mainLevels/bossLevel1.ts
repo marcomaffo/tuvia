@@ -87,8 +87,8 @@ export default class BossLevel1 extends RunLevel {
     this.drawLevel();
   }
 
-  loadAditionalContent(bossTurningTexture: HTMLImageElement, bossNormalTexture: HTMLImageElement, bossZelle: HTMLImageElement, powerUpTex: HTMLImageElement, stars: HTMLImageElement) {
-    this.boss.loadBossContent(bossTurningTexture, bossNormalTexture, stars);
+  loadAditionalContent(bossNormalTexture: HTMLImageElement, bossZelle: HTMLImageElement, powerUpTex: HTMLImageElement, stars: HTMLImageElement) {
+    this.boss.loadBossContent(bossNormalTexture, stars);
     this.powerUpTex = powerUpTex;
     this.bossCellTex = bossZelle;
   }
