@@ -369,6 +369,7 @@ export default class Game {
           this.imgsLoadedObj = { loaded: 0, ready: false, max: 0 };
           this.loadLevel(this.currentLevelNumber);
           this.gameState = GameState.Level;
+          this.currentLevel.update(elapsedMillis, this.keyboard.state);
         }
         break;
       case GameState.Level:
@@ -409,6 +410,7 @@ export default class Game {
             } else if (this.menuSelection === 1) {
               this.gameState = GameState.Level;
               this.restartLevel();
+              this.currentLevel.update(elapsedMillis, this.keyboard.state);
             } else {
               this.gameState = GameState.Menu;
               this.menuSelection = 0;
