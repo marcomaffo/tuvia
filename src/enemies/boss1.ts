@@ -75,6 +75,7 @@ export default class Boss1 extends Enemy {
             this.rotationDegrees = 180;
             this.currentState = 0;
             this.currentAction++;
+            this.timeSinceLastStateChange = 0;
           }
           break;
         case 2:
@@ -130,6 +131,7 @@ export default class Boss1 extends Enemy {
           if (this.rotationDegrees < 0 || this.rotationDegrees > 180) {
             this.currentState = 0;
             this.currentAction += this.bossDirection;
+            this.timeSinceLastStateChange = 0;
           }
           break;
         case 2:
@@ -172,6 +174,7 @@ export default class Boss1 extends Enemy {
               this.rotationDegrees = 0;
               this.currentState = 0;
               this.currentAction++;
+              this.timeSinceLastStateChange = 0;
             }
           }
           break;
