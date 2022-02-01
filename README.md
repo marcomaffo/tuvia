@@ -6,3 +6,9 @@ Tha game is a simple 2D sidescrolling shooting platformer. The game features two
 ## Planned features
 - Add sound
 - Add a level editor
+
+## How to play
+Download the repo
+-> npm i
+-> npm run publish
+-> open the html-file in the build-folder
